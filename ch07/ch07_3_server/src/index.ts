@@ -1,9 +1,9 @@
 import { createServer } from "http";
 import { getPublicDirPath } from "./config/index.js";
-import { makeDir } from "./utils/makeDir.js";
+import { makeDir } from "./utils/index.js";
 import { createExpressApp } from "./express/index.js";
-import type { MongoDB } from "./mongodb/connectAndUseDB.js";
-import { connectAndUseDB } from "./mongodb/connectAndUseDB.js";
+import type { MongoDB } from "./mongodb/index.js";
+import { connectAndUseDB } from "./mongodb/index.js";
 
 makeDir(getPublicDirPath());
 

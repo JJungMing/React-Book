@@ -1,11 +1,10 @@
-import type { MongoDB } from "../mongodb/connectAndUseDB.js";
+import type { MongoDB } from "../mongodb/index.js";
 import { Router } from "express";
 
 export const testRouter = (...args: any[]) => {
   const db: MongoDB = args[0];
   const test = db.collection("test");
   const router = Router();
-
   return router
     .get("/", async (req, res) => {
       try {
@@ -30,10 +29,8 @@ export const testRouter = (...args: any[]) => {
       const { body } = req;
       try {
         try {
-          await test.drop();
-        } catch (e) {
-          // 오류 무시
-        }
+          await test.drop(); //
+        } catch (e) {}
 
         const insertResult = await test.insertOne({ id: "1234", ...body });
         const { insertedId } = insertResult;
@@ -63,7 +60,7 @@ export const testRouter = (...args: any[]) => {
       const { id } = req.params;
       try {
         await test.deleteOne({ id });
-        res.json({ ok: true });
+        res.json({ ok: true, id });
       } catch (e) {
         if (e instanceof Error)
           res.json({ ok: false, errorMessage: e.message });

@@ -1,1 +1,1 @@
-export * from "./connectAndUseDB";
+export * from './connectAndUseDB.js'
